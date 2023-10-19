@@ -1,7 +1,5 @@
 language: csharp
 mono: none
-sudo: required
-dist: xenial
 dotnet: 6.0.202
 branches:
   only:
