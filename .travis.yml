@@ -1,16 +1,13 @@
 language: csharp
 mono: none
 sudo: required
-dist: xenial
+dist: focal
 dotnet: 6.0.202
 branches:
   only:
     - master
 #    - develop
 # Add the 'before_install' section to install Python 3.8
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install python3.8
 script:
   - dotnet build
   - dotnet test
