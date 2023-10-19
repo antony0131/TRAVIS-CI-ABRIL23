@@ -7,15 +7,23 @@ branches:
   only:
     - master
 #    - develop
-# Add the 'before_install' section to install Python 3.8
-before_script:
-  # Install the Google Cloud SDK
-  - curl https://sdk.cloud.google.com | bash
+before_install:
+  # Decrypt and add the Google Cloud SDK key
+  - openssl aes-256-cbc -K $encrypted_your_encrypted_key -iv $encrypted_your_initialization_vector -in travis-net6-a23-c98189410a2b.json.enc -out travis-net6-a23-c98189410a2b.json -d
 
-# Run 'gcloud' command to ensure the SDK is installed
-script:
-  - source $HOME/google-cloud-sdk/path.bash.inc
-  - gcloud version
+  # Add the Google Cloud SDK repository
+  - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+  # Import the Google Cloud public key
+  - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+
+  # Update the apt-get package list
+  - sudo apt-get update
+
+install:
+  # Install the Google Cloud SDK
+  - sudo apt-get install google-cloud-sdk
+  
 script:
   - dotnet build
   - dotnet test
