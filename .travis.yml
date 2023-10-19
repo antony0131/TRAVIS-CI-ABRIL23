@@ -8,9 +8,12 @@ branches:
     - master
 #    - develop
 # Add the 'before_install' section to install Python 3.8
+python:
+  - 3.8
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install python3.12
+  - pip install --upgrade pip
+  - pip install --upgrade google-cloud-sdk
+  - gcloud version
 script:
   - dotnet build
   - dotnet test
