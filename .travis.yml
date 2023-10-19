@@ -8,14 +8,17 @@ branches:
     - master
 #    - develop
 # Specify the version of Python to use
-python:
-  - 3.8
+before_install:
+  # Set the CLOUDSDK_PYTHON environment variable to use Python 3.8
+  - export CLOUDSDK_PYTHON=python3.8
 
-# Add the 'before_script' section to install and set up Python 3.8
-before_script:
-  - pip install --upgrade pip
-  - pip install --upgrade google-cloud-sdk
-  - gcloud version
+  # Install the required dependencies for the Google Cloud SDK
+  - sudo apt-get update
+  - sudo apt-get install -y curl python3.8
+
+  # Download and install the Google Cloud SDK
+  - curl https://sdk.cloud.google.com | CLOUDSDK_CORE_DISABLE_PROMPTS=1 bash
+
 script:
   - dotnet build
   - dotnet test
