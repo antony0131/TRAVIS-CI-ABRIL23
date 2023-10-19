@@ -8,11 +8,13 @@ branches:
     - master
 #    - develop
 # Add the 'before_install' section to install Python 3.8
-python:
-  - 3.8
-before_install:
-  - pip install --upgrade pip
-  - pip install --upgrade google-cloud-sdk
+before_script:
+  # Install the Google Cloud SDK
+  - curl https://sdk.cloud.google.com | bash
+
+# Run 'gcloud' command to ensure the SDK is installed
+script:
+  - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud version
 script:
   - dotnet build
