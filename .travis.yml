@@ -1,7 +1,7 @@
 language: csharp
 mono: none
 sudo: required
-dist: focal
+dist: bionic
 dotnet: 6.0.202
 branches:
   only:
