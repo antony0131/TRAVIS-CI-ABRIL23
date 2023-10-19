@@ -1,7 +1,7 @@
 language: csharp
 mono: none
 sudo: required
-dist: bionic
+dist: eoan
 dotnet: 6.0.202
 branches:
   only:
