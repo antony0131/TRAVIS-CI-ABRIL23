@@ -10,7 +10,7 @@ branches:
 # Add the 'before_install' section to install Python 3.8
 before_install:
   - sudo apt-get update
-  - sudo apt-get install python3.8
+  - sudo apt-get install python3.12
 script:
   - dotnet build
   - dotnet test
